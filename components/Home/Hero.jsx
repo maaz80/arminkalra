@@ -59,8 +59,9 @@ export default function Hero() {
   const [heroData, setHeroData] = useState(defaultHeroData);
 
   useEffect(() => {
-    const backendUrl =
-      process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000/api";
+    const rawUrl = (process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000/api").trim();
+    const cleanUrl = rawUrl.replace(/\/+$/, "");
+    const backendUrl = cleanUrl.endsWith("/api") ? cleanUrl : `${cleanUrl}/api`;
 
     fetch(`${backendUrl}/hero`)
       .then((res) => res.json())
