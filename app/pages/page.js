@@ -7,7 +7,7 @@ import Footer from "@/components/Home/Footer";
 
 export default function Pages() {
   return (
-    <main className="min-h-screen bg-[#08080a] text-white overflow-x-hidden">
+    <main className="min-h-screen bg-background text-white overflow-x-hidden">
       <Hero />
       <About />
       <Portfolio />

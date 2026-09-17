@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #08080a;
+  --background: #14203A;
   --foreground: #ffffff;
 
   /* Brand Accent Colors */
@@ -29,7 +29,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #08080a;
+    --background: #14203A;
     --foreground: #ffffff;
   }
 }
@@ -205,64 +205,89 @@ body {
    FLOATING ANIMATIONS FOR BADGES & SCROLL MARQUEE
    ========================================================================== */
 
-@keyframes float-circular-cw {
+/* Tilted Oval Floating Animations (Clockwise & Counter-Clockwise) */
+@keyframes float-tilted-oval-cw {
   0% {
-    transform: translate(0px, -3px);
+    transform: translate(14px, 6px);
+  }
+  12.5% {
+    transform: translate(8px, 8px);
   }
   25% {
-    transform: translate(4px, 0px);
+    transform: translate(-3px, 5px);
+  }
+  37.5% {
+    transform: translate(-11px, -1px);
   }
   50% {
-    transform: translate(0px, 4px);
+    transform: translate(-14px, -6px);
+  }
+  62.5% {
+    transform: translate(-8px, -8px);
   }
   75% {
-    transform: translate(-4px, 0px);
+    transform: translate(3px, -5px);
+  }
+  87.5% {
+    transform: translate(11px, 1px);
   }
   100% {
-    transform: translate(0px, -3px);
+    transform: translate(14px, 6px);
   }
 }
 
-@keyframes float-circular-ccw {
+@keyframes float-tilted-oval-ccw {
   0% {
-    transform: translate(0px, -3px);
+    transform: translate(14px, -6px);
+  }
+  12.5% {
+    transform: translate(8px, -8px);
   }
   25% {
-    transform: translate(-4px, 0px);
+    transform: translate(-3px, -5px);
+  }
+  37.5% {
+    transform: translate(-11px, 1px);
   }
   50% {
-    transform: translate(0px, 4px);
+    transform: translate(-14px, 6px);
+  }
+  62.5% {
+    transform: translate(-8px, 8px);
   }
   75% {
-    transform: translate(4px, 0px);
+    transform: translate(3px, 5px);
+  }
+  87.5% {
+    transform: translate(11px, -1px);
   }
   100% {
-    transform: translate(0px, -3px);
+    transform: translate(14px, -6px);
   }
 }
 
 .animate-float-cw-1 {
-  animation: float-circular-cw 6s ease-in-out infinite;
+  animation: float-tilted-oval-cw 7s ease-in-out infinite;
 }
 
 .animate-float-cw-2 {
-  animation: float-circular-cw 7s ease-in-out 1.2s infinite;
+  animation: float-tilted-oval-cw 8.5s ease-in-out 1.2s infinite;
 }
 
 .animate-float-cw-3 {
-  animation: float-circular-cw 8s ease-in-out 2.4s infinite;
+  animation: float-tilted-oval-cw 9.5s ease-in-out 2.4s infinite;
 }
 
 .animate-float-ccw-1 {
-  animation: float-circular-ccw 6.5s ease-in-out 0.6s infinite;
+  animation: float-tilted-oval-ccw 7.5s ease-in-out 0.6s infinite;
 }
 
 .animate-float-ccw-2 {
-  animation: float-circular-ccw 7.5s ease-in-out 1.8s infinite;
+  animation: float-tilted-oval-ccw 9s ease-in-out 1.8s infinite;
 }
 
 .animate-float-ccw-3 {
-  animation: float-circular-ccw 8.5s ease-in-out 3s infinite;
+  animation: float-tilted-oval-ccw 10s ease-in-out 3s infinite;
 }
 
 /* Marquee Row Keyframe Animations */

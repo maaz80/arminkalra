@@ -1,3 +1,4 @@
+import UserAuthGuard from "@/components/Auth/UserAuthGuard";
 import Hero from "@/components/Home/Hero";
 import About from "@/components/Home/About";
 import Portfolio from "@/components/Home/Portfolio";
@@ -7,13 +8,15 @@ import Footer from "@/components/Home/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#08080a] text-white overflow-x-hidden">
-      <Hero />
-      <About />
-      <Portfolio />
-      <Resume />
-      <Clients />
-      <Footer />
-    </main>
+    <UserAuthGuard>
+      <main className="min-h-screen bg-background text-white overflow-x-hidden">
+        <Hero />
+        <About />
+        <Portfolio />
+        <Resume />
+        <Clients />
+        <Footer />
+      </main>
+    </UserAuthGuard>
   );
 }
