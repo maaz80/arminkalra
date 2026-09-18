@@ -83,14 +83,15 @@ export default function Resume() {
     if (linkUrl === "#download-resume" || !linkUrl) {
       linkUrl = "/Latest CV 02-03-26.pdf";
     }
-    if (linkUrl.includes("cloudinary.com") && !linkUrl.includes("fl_attachment")) {
-      linkUrl = linkUrl.replace("/upload/", "/upload/fl_attachment/");
+    // Clean up any fl_attachment flag that causes Cloudinary ERR_INVALID_RESPONSE
+    if (linkUrl.includes("fl_attachment")) {
+      linkUrl = linkUrl.replace("/upload/fl_attachment/", "/upload/").replace("/fl_attachment", "");
     }
     return linkUrl;
   };
 
   const handleDownload = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     const linkUrl = getFormattedLink(header.downloadLink);
 
     try {
@@ -117,7 +118,7 @@ export default function Resume() {
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000);
+      setTimeout(() => window.URL.revokeObjectURL(blobUrl), 2000);
     } catch (err) {
       console.error("Blob download failed, using direct anchor fallback:", err);
       const a = document.createElement("a");
