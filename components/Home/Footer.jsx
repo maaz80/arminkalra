@@ -67,6 +67,58 @@ export default function Footer() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const getFormattedLink = (url) => {
+    let linkUrl = url || "#download-resume";
+    if (linkUrl === "#download-resume" || !linkUrl) {
+      linkUrl = "/Latest CV 02-03-26.pdf";
+    }
+    if (linkUrl.includes("cloudinary.com") && !linkUrl.includes("fl_attachment")) {
+      linkUrl = linkUrl.replace("/upload/", "/upload/fl_attachment/");
+    }
+    return linkUrl;
+  };
+
+  const handleDownloadResume = async (e) => {
+    e.preventDefault();
+    const linkUrl = getFormattedLink(footerData.downloadLink);
+
+    try {
+      const response = await fetch(linkUrl);
+      if (!response.ok) throw new Error("Fetch failed");
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.style.display = "none";
+      a.href = blobUrl;
+
+      let filename = "Latest CV 02-03-26.pdf";
+      if (linkUrl.includes("cloudinary.com")) {
+        const parts = linkUrl.split("/");
+        const lastPart = parts[parts.length - 1];
+        if (lastPart && lastPart.toLowerCase().endsWith(".pdf")) {
+          filename = decodeURIComponent(lastPart);
+        } else {
+          filename = "Resume.pdf";
+        }
+      }
+
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000);
+    } catch (err) {
+      console.error("Blob download failed, using direct anchor fallback:", err);
+      const a = document.createElement("a");
+      a.href = linkUrl;
+      a.download = "Resume.pdf";
+      a.target = "_blank";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  };
+
   const quickLinksList = footerData.quickLinks || [];
   const halfLength = Math.ceil(quickLinksList.length / 2);
   const col1Links = quickLinksList.slice(0, halfLength);
