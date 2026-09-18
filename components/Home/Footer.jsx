@@ -69,11 +69,7 @@ export default function Footer() {
 
   const handleDownloadResume = async (e) => {
     e.preventDefault();
-    let linkUrl = footerData.downloadLink || "#download-resume";
-    
-    if (linkUrl === "#download-resume" || !linkUrl.startsWith("http")) {
-      linkUrl = "/Latest CV 02-03-26.pdf";
-    }
+    const linkUrl = "/Latest CV 02-03-26.pdf";
 
     try {
       const response = await fetch(linkUrl);

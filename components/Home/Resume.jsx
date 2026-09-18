@@ -80,11 +80,8 @@ export default function Resume() {
 
   const handleDownload = async (e) => {
     e.preventDefault();
-    let linkUrl = header.downloadLink || "#download-resume";
-    
-    if (linkUrl === "#download-resume" || !linkUrl.startsWith("http")) {
-      linkUrl = "/Latest CV 02-03-26.pdf";
-    }
+    // Use the same static file functionality as the footer
+    const linkUrl = "/Latest CV 02-03-26.pdf";
 
     try {
       // Fetch the file directly from Cloudinary as a blob to force download
