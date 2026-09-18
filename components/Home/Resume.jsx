@@ -78,6 +78,58 @@ export default function Resume() {
       });
   }, []);
 
+  const getFormattedLink = (url) => {
+    let linkUrl = url || "#download-resume";
+    if (linkUrl === "#download-resume" || !linkUrl) {
+      linkUrl = "/Latest CV 02-03-26.pdf";
+    }
+    if (linkUrl.includes("cloudinary.com") && !linkUrl.includes("fl_attachment")) {
+      linkUrl = linkUrl.replace("/upload/", "/upload/fl_attachment/");
+    }
+    return linkUrl;
+  };
+
+  const handleDownload = async (e) => {
+    e.preventDefault();
+    const linkUrl = getFormattedLink(header.downloadLink);
+
+    try {
+      const response = await fetch(linkUrl);
+      if (!response.ok) throw new Error("Fetch failed");
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.style.display = "none";
+      a.href = blobUrl;
+
+      let filename = "Latest CV 02-03-26.pdf";
+      if (linkUrl.includes("cloudinary.com")) {
+        const parts = linkUrl.split("/");
+        const lastPart = parts[parts.length - 1];
+        if (lastPart && lastPart.toLowerCase().endsWith(".pdf")) {
+          filename = decodeURIComponent(lastPart);
+        } else {
+          filename = "Resume.pdf";
+        }
+      }
+
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000);
+    } catch (err) {
+      console.error("Blob download failed, using direct anchor fallback:", err);
+      const a = document.createElement("a");
+      a.href = linkUrl;
+      a.download = "Resume.pdf";
+      a.target = "_blank";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  };
+
   return (
     <section className="w-full bg-background text-white pt-12 pb-0 sm:py-24 border-none md:border-t border-zinc-900/60 font-sans">
       <div className="section-wrapper">
@@ -135,11 +187,10 @@ export default function Resume() {
             {header.downloadText && (
               <div className="pt-2">
                 <a
-                  href={header.downloadLink || "#download-resume"}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={getFormattedLink(header.downloadLink)}
+                  onClick={handleDownload}
                   download
-                  className="inline-flex items-center gap-2 text-[#ff5252] hover:text-[#ff3d00] transition-colors font-sans font-semibold text-[16px] group"
+                  className="inline-flex items-center gap-2 text-[#ff5252] hover:text-[#ff3d00] transition-colors font-sans font-semibold text-[16px] group cursor-pointer"
                 >
                   <span>{header.downloadText}</span>
                   <svg

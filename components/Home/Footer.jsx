@@ -184,39 +184,32 @@ export default function Footer() {
                 href={footerData.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="LinkedIn Profile"
-                className="w-10 h-10 rounded-full bg-white/10 border border-white/80 flex items-center justify-center text-zinc-300 hover:text-white hover:border-zinc-700 transition-colors shadow-sm"
+                aria-label="LinkedIn"
+                className="hover:text-white transition-colors"
               >
-                <FaLinkedinIn className="text-base" />
+                <FaLinkedinIn />
               </a>
             )}
           </div>
 
-          {/* Right: Inline Contact Links */}
-          <div className="flex flex-wrap items-center gap-6 sm:gap-8 text-sm text-zinc-300 font-sans font-normal">
-            {/* Email with copy icon */}
-            {footerData.email && (
-              <div className="flex items-center gap-2">
-                <a
-                  href={`mailto:${footerData.email}`}
-                  className="hover:text-white transition-colors"
-                >
-                  {footerData.email}
-                </a>
-                <button
-                  onClick={handleCopyEmail}
-                  title="Copy email address"
-                  className="text-zinc-400 hover:text-white transition-colors p-1 cursor-pointer"
-                  aria-label="Copy Email"
-                >
-                  {copied ? (
-                    <FaCheck className="text-emerald-400 text-xs animate-bounce" />
-                  ) : (
-                    <FaRegCopy className="text-xs" />
-                  )}
-                </button>
-              </div>
-            )}
+          {/* Contact Details */}
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-4 text-sm text-zinc-300">
+            {/* Email with copy button */}
+            <div className="flex items-center gap-2">
+              <a
+                href={`mailto:${footerData.email || "pyushanand2007@gmail.com"}`}
+                className="hover:text-white transition-colors"
+              >
+                {footerData.email || "pyushanand2007@gmail.com"}
+              </a>
+              <button
+                onClick={handleCopyEmail}
+                aria-label="Copy Email"
+                className="text-zinc-400 hover:text-white transition-colors cursor-pointer"
+              >
+                {copied ? <FaCheck className="text-emerald-400 text-xs" /> : <FaRegCopy className="text-xs" />}
+              </button>
+            </div>
 
             {/* Phone with phone icon */}
             {footerData.phone && (
@@ -241,21 +234,19 @@ export default function Footer() {
             {footerData.downloadText && (
               <div className="flex items-center gap-2">
                 <a
-                  href={footerData.downloadLink || "#download-resume"}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={getFormattedLink(footerData.downloadLink)}
+                  onClick={handleDownloadResume}
                   download
-                  className="hover:text-white transition-colors font-medium"
+                  className="hover:text-white transition-colors font-medium cursor-pointer"
                 >
                   {footerData.downloadText}
                 </a>
                 <a
-                  href={footerData.downloadLink || "#download-resume"}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={getFormattedLink(footerData.downloadLink)}
+                  onClick={handleDownloadResume}
                   download
                   aria-label="Download Resume File"
-                  className="text-zinc-400 hover:text-white transition-colors"
+                  className="text-zinc-400 hover:text-white transition-colors cursor-pointer"
                 >
                   <FaDownload className="text-xs" />
                 </a>
