@@ -78,56 +78,47 @@ export default function Resume() {
       });
   }, []);
 
-  const getFormattedLink = (url) => {
-    let linkUrl = url || "#download-resume";
-    if (linkUrl === "#download-resume" || !linkUrl) {
+  const handleDownload = async (e) => {
+    e.preventDefault();
+    let linkUrl = header.downloadLink || "#download-resume";
+    
+    if (linkUrl === "#download-resume" || !linkUrl.startsWith("http")) {
       linkUrl = "/Latest CV 02-03-26.pdf";
     }
-    // Clean up any fl_attachment flag that causes Cloudinary ERR_INVALID_RESPONSE
-    if (linkUrl.includes("fl_attachment")) {
-      linkUrl = linkUrl.replace("/upload/fl_attachment/", "/upload/").replace("/fl_attachment", "");
-    }
-    return linkUrl;
-  };
-
-  const handleDownload = async (e) => {
-    if (e) e.preventDefault();
-    const linkUrl = getFormattedLink(header.downloadLink);
 
     try {
+      // Fetch the file directly from Cloudinary as a blob to force download
       const response = await fetch(linkUrl);
-      if (!response.ok) throw new Error("Fetch failed");
+      if (!response.ok) throw new Error("Network response was not ok");
+      
       const blob = await response.blob();
       const blobUrl = window.URL.createObjectURL(blob);
+      
       const a = document.createElement("a");
       a.style.display = "none";
       a.href = blobUrl;
-
-      let filename = "Latest CV 02-03-26.pdf";
+      
+      // Determine filename
+      let filename = "Resume.pdf";
       if (linkUrl.includes("cloudinary.com")) {
         const parts = linkUrl.split("/");
         const lastPart = parts[parts.length - 1];
         if (lastPart && lastPart.toLowerCase().endsWith(".pdf")) {
           filename = decodeURIComponent(lastPart);
-        } else {
-          filename = "Resume.pdf";
         }
       }
-
+      
       a.download = filename;
       document.body.appendChild(a);
       a.click();
+      
+      // Cleanup
       document.body.removeChild(a);
-      setTimeout(() => window.URL.revokeObjectURL(blobUrl), 2000);
+      setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000);
     } catch (err) {
-      console.error("Blob download failed, using direct anchor fallback:", err);
-      const a = document.createElement("a");
-      a.href = linkUrl;
-      a.download = "Resume.pdf";
-      a.target = "_blank";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      console.error("Blob download failed, opening in new tab as fallback:", err);
+      // Fallback: just open in new tab
+      window.open(linkUrl, "_blank");
     }
   };
 
@@ -158,7 +149,6 @@ export default function Resume() {
             </span>
           </div>
 
-          {/* Right Column Timeline */}
           <div className="md:col-span-9 space-y-5">
             {experiences.map((exp, idx) => (
               <div
@@ -188,9 +178,8 @@ export default function Resume() {
             {header.downloadText && (
               <div className="pt-2">
                 <a
-                  href={getFormattedLink(header.downloadLink)}
+                  href="#"
                   onClick={handleDownload}
-                  download
                   className="inline-flex items-center gap-2 text-[#ff5252] hover:text-[#ff3d00] transition-colors font-sans font-semibold text-[16px] group cursor-pointer"
                 >
                   <span>{header.downloadText}</span>
