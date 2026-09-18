@@ -112,7 +112,7 @@ export default function Hero() {
       </header>
 
       {/* Main Content Area */}
-      <main className="flex-1 flex flex-col items-center justify-center px-4 sm:px-8 pt-8 sm:pt-6 max-w-6xl mx-auto w-full">
+      <main className="flex-1 flex flex-col items-center justify-center px-4 sm:px-8 pt-0 sm:pt-6 max-w-6xl mx-auto w-full">
         {/* Main Heading */}
         <h1 className="text-center font-serif font-semibold text-[30px] min-[400px]:text-[36px] sm:text-[48px] md:text-[62px] leading-10 min-[400px]:leading-12 sm:leading-15.5 md:leading-20 tracking-tight text-white max-w-5xl select-none py-4">
           {/* Line 1 */}

@@ -71,7 +71,7 @@ export default function Clients() {
   return (
     <section
       ref={containerRef}
-      className="w-full bg-background py-16 sm:py-24 border-t border-zinc-900/60 overflow-hidden relative"
+      className="w-full bg-background pt-12 pb-0 sm:py-24 border-none md:border-t border-zinc-900/60 overflow-hidden relative"
     >
       {/* Floating Heart Icon Badge on Right */}
       <div className="absolute right-8 sm:right-24 top-1/2 -translate-y-1/2 z-20 pointer-events-none">

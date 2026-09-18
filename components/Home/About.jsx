@@ -38,7 +38,7 @@ export default function About() {
   }, []);
 
   return (
-    <section className="w-full bg-background text-white py-16 sm:py-24 border-t border-zinc-900/60 font-sans">
+    <section className="w-full bg-background text-white pt-12 pb-0 sm:py-24 border-none md:border-t border-zinc-900/60 font-sans">
       <div className="section-wrapper">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
           {/* Left Column: Heading */}

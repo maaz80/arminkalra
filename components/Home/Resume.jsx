@@ -79,7 +79,7 @@ export default function Resume() {
   }, []);
 
   return (
-    <section className="w-full bg-background text-white py-16 sm:py-24 border-t border-zinc-900/60 font-sans">
+    <section className="w-full bg-background text-white pt-12 pb-0 sm:py-24 border-none md:border-t border-zinc-900/60 font-sans">
       <div className="section-wrapper">
         {/* Header Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 items-start mb-8 sm:mb-12">
@@ -136,6 +136,9 @@ export default function Resume() {
               <div className="pt-2">
                 <a
                   href={header.downloadLink || "#download-resume"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
                   className="inline-flex items-center gap-2 text-[#ff5252] hover:text-[#ff3d00] transition-colors font-sans font-semibold text-[16px] group"
                 >
                   <span>{header.downloadText}</span>

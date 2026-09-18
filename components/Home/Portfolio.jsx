@@ -124,7 +124,7 @@ export default function Portfolio() {
   }, []);
 
   return (
-    <section className="w-full bg-background text-white py-16 sm:py-24 relative overflow-hidden font-sans border-t border-zinc-900/60">
+    <section className="w-full bg-background text-white pt-12 pb-0 sm:py-24 relative overflow-hidden font-sans border-none md:border-t border-zinc-900/60">
       {/* Background Watermark Text */}
       <div className="absolute top-12 left-1/2 -translate-x-1/2 w-full select-none pointer-events-none opacity-5 text-center">
         <span className="font-serif font-bold text-[120px] sm:text-[200px] md:text-[280px] leading-none text-transparent stroke-text uppercase tracking-widest">
