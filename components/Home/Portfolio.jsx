@@ -167,6 +167,7 @@ export default function Portfolio() {
                       isImageRight ? "order-1 lg:order-2" : ""
                     }`}
                   >
+                    
                     <img
                       src={proj.image || "/images/bank-image.webp"}
                       alt={proj.imageAlt || proj.title}
