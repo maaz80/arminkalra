@@ -172,7 +172,7 @@ export default function Portfolio() {
                       alt={proj.imageAlt || proj.title}
                       width={800}
                       height={600}
-                      className="w-full h-auto max-h-[480px] object-contain rounded-xl drop-shadow-2xl"
+                      className="w-full h-auto max-h-120 object-contain rounded-xl drop-shadow-2xl"
                     />
                   </div>
 
