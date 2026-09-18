@@ -109,7 +109,7 @@ export default function Footer() {
   const col2Links = quickLinksList.slice(halfLength);
 
   return (
-    <footer className="w-full bg-background text-white pt-12 pb-0 sm:py-24 relative overflow-hidden font-sans border-none md:border-t border-zinc-900/60 selection:bg-white/20">
+    <footer className="w-full bg-background text-white pt-12 pb-10 sm:py-24 relative overflow-hidden font-sans border-none md:border-t border-zinc-900/60 selection:bg-white/20">
       {/* Background Watermark Text */}
       <div className="absolute bottom-4 sm:bottom-8 lg:bottom-12 left-0 w-full select-none pointer-events-none z-0 overflow-hidden leading-none">
         <span className="font-serif font-bold text-[65px] min-[400px]:text-[85px] sm:text-[140px] md:text-[185px] lg:text-[230px] xl:text-[195px] text-transparent stroke-text-faint tracking-tight whitespace-nowrap block opacity-20 sm:opacity-25">
